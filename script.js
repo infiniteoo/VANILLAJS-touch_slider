@@ -24,6 +24,7 @@ slides.forEach((slide, index) => {
     slide.addEventListener('mousemove', touchMove);
 });
 
+// disable context menu
 window.oncontextmenu = function(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -32,10 +33,16 @@ window.oncontextmenu = function(event) {
 
 function touchStart(index) {
     return function(event){
+        currentIndex = index;
+        startPos = getPositionX(event);
+        console.log(startPos);
         isDragging = true;
     }
 }
 
+function getPositionX(e) {
+    return e.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+}
 
 function touchEnd() {
     isDragging = false;
