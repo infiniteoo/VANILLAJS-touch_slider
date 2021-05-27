@@ -13,7 +13,14 @@ slides.forEach((slide, index) => {
     slideImage.addEventListener('dragstart', (e) => e.preventDefault());   
 
     // touch events
-    
+    slide.addEventListener('touchstart', touchStart(index));
+    slide.addEventListener('touchend', touchEnd);
+    slide.addEventListener('touchmove', touchMove);
 
     // mouse events
-})
+    slide.addEventListener('mousedown', touchStart(index));
+    slide.addEventListener('mouseup', touchEnd);
+    slide.addEventListener('mouseleave', touchEnd);
+    slide.addEventListener('mousemove', touchMove);
+});
+
