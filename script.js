@@ -24,3 +24,26 @@ slides.forEach((slide, index) => {
     slide.addEventListener('mousemove', touchMove);
 });
 
+window.oncontextmenu = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    return false;
+}
+
+function touchStart(index) {
+    return function(event){
+        isDragging = true;
+    }
+}
+
+
+function touchEnd() {
+    isDragging = false;
+};
+
+function touchMove() {
+    if(isDragging) {
+        console.log('move') 
+    }
+    
+};
