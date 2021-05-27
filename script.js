@@ -37,11 +37,22 @@ function touchStart(index) {
         startPos = getPositionX(event);
         console.log(startPos);
         isDragging = true;
+
+        animationID = requestAnimationFrame(animation)
     }
 }
 
+function animation() {
+    setSliderPosition();
+    if(isDragging) requestAnimationFrame(animation);
+}
+
+function setSliderPosition() {
+    slider.style.transform = `translateX(${currentTranslate}px)`
+}
+
 function getPositionX(e) {
-    return e.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+    return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
 }
 
 function touchEnd() {
