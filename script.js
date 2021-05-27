@@ -39,6 +39,7 @@ function touchStart(index) {
         isDragging = true;
 
         animationID = requestAnimationFrame(animation)
+        slider.classList.add('grabbing');
     }
 }
 
@@ -58,6 +59,17 @@ function getPositionX(e) {
 function touchEnd() {
     isDragging = false;
     cancelAnimationFrame(animationID);
+    const movedBy = currentTranslate - prevTranslate;
+    if(movedBy < -100 && currentIndex < slides.length - 1){
+        currentIndex += 1;
+    }
+    if(movedBy > 100 && currentIndex > 0){
+        currentIndex -= 1;
+    }
+
+    setPositionByIndex()
+
+    slider.classList.remove('grabbing');
 };
 
 function touchMove(event) {
@@ -68,3 +80,9 @@ function touchMove(event) {
     }
     
 };
+
+function setPositionByIndex(){
+    currentTranslate = currentIndex * -window.innerWidth;
+    prevTranslate = currentTranslate;
+    setSliderPosition();
+}
