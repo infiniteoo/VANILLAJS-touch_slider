@@ -57,11 +57,14 @@ function getPositionX(e) {
 
 function touchEnd() {
     isDragging = false;
+    cancelAnimationFrame(animationID);
 };
 
-function touchMove() {
+function touchMove(event) {
     if(isDragging) {
-        console.log('move') 
+        const currentPosition = getPositionX(event);
+        currentTranslate = prevTranslate + currentPosition - startPos;
+
     }
     
 };
